@@ -1,0 +1,430 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+  background: #f1f5f9;
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ---------- 顶栏 ---------- */
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title-row h1 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.hall-info {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.toolbar button {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.toolbar button:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.toolbar button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.toolbar .sep {
+  width: 1px;
+  height: 20px;
+  background: #e2e8f0;
+}
+
+.toolbar .spacer {
+  flex: 1;
+}
+
+.status {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.status.good {
+  color: #15803d;
+}
+
+.status.warn {
+  color: #b45309;
+}
+
+.status.bad {
+  color: #dc2626;
+}
+
+/* ---------- 主区域 ---------- */
+main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.canvas-area {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  background: #e2e8f0;
+}
+
+.floorplan {
+  position: absolute;
+  inset: 0;
+}
+
+.floorplan svg {
+  display: block;
+  user-select: none;
+  touch-action: none;
+}
+
+aside {
+  width: 360px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.panel h2 {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.panel h3 {
+  font-size: 13px;
+  margin: 12px 0 6px;
+  color: #334155;
+}
+
+.muted {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 6px 0;
+}
+
+.ok {
+  color: #15803d;
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.bad {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+/* ---------- 告警列表 ---------- */
+.warning-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.warning-item.error {
+  border-left-color: #dc2626;
+}
+
+.warning-item.caution {
+  border-left-color: #d97706;
+}
+
+.warning-item:hover {
+  background: #f8fafc;
+}
+
+.warning-item.selected {
+  background: #eff6ff;
+  border-color: #2563eb;
+  border-left-color: #2563eb;
+}
+
+.warning-message {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.warning-detail {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.warning-booths {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: #e2e8f0;
+}
+
+.chip b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 11px;
+}
+
+/* ---------- 属性面板 ---------- */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.field span {
+  width: 64px;
+  flex-shrink: 0;
+  color: #475569;
+}
+
+.field input,
+.field select {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid #bfdbfe;
+  border-color: #2563eb;
+}
+
+.field-row {
+  display: flex;
+  gap: 12px;
+}
+
+.field-row .field {
+  flex: 1;
+}
+
+.inspector-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.inspector-actions button {
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.inspector-actions button:hover {
+  background: #f1f5f9;
+}
+
+.inspector-actions button.danger {
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+
+.inspector-actions button.danger:hover {
+  background: #fef2f2;
+}
+
+/* ---------- 画布悬浮控件 ---------- */
+.zoom-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.zoom-controls button {
+  min-width: 30px;
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.zoom-controls button:hover {
+  background: #f1f5f9;
+}
+
+.zoom-pct {
+  font-size: 12px;
+  color: #64748b;
+  padding-right: 6px;
+  min-width: 42px;
+  text-align: right;
+}
+
+.coord-readout {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #475569;
+  font-variant-numeric: tabular-nums;
+}
+
+.legend {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0f766e;
+  display: inline-block;
+}
+
+.legend-line {
+  width: 18px;
+  border-top: 3px dashed #0f766e;
+  display: inline-block;
+}
+
+.legend-badge {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  padding-top: 3px;
+}
+
+.legend-zone {
+  width: 14px;
+  height: 10px;
+  border: 1.5px dashed #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  display: inline-block;
+}
+
+.help p {
+  margin: 0;
+}
